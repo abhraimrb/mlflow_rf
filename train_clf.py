@@ -4,7 +4,7 @@ import sys
 
 import pandas as pd
 import numpy as np
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score,precision_score,recall_score,f1_score,roc_auc_score
 
 from sklearn.model_selection import train_test_split
@@ -33,20 +33,19 @@ if __name__ == "__main__":
     y_train = train[["loan_approval_status"]]
     y_test = test[["loan_approval_status"]]
 
-    C = float(sys.argv[1]) if len(sys.argv) > 1 else 0.5
-    #l1_ratio = float(sys.argv[2]) if len(sys.argv) > 2 else 0.5
+    
 
     with mlflow.start_run():
-        model = LogisticRegression(C=C)
+        model = RandomForestClassifier()
         model.fit(X_train, y_train)
         predictions =  model.predict(X_test)
-        mlflow.log_param("C", C)
-    
+        predictions_proba = model.predict_proba(X_test)
+        
         test_accuracy = accuracy_score(y_test, predictions)
         test_precision_score = precision_score(y_test, predictions)
         test_recall_score = recall_score(y_test, predictions)
         test_f1_score = f1_score(y_test, predictions)
-        auc_score = roc_auc_score(y_test, predictions)
+        auc_score = roc_auc_score(y_test, predictions_proba)
         metrics = {"Test_accuracy": test_accuracy, "Test_precision_score": test_precision_score,
                    "Test_recall_score":test_recall_score,"Test_f1_score":test_f1_score, "auc score":auc_score}
     
@@ -56,10 +55,12 @@ if __name__ == "__main__":
     
     #mlflow.set_tag("Classifier", "Random Forest")
     
-        mlflow.set_tag("Classifier", "LR-tuned parameters-wo autolog")
+        mlflow.set_tag("Classifier", "RF-tuned parameters-wo autolog")
        
-        mlflow.sklearn.log_model(model, "LR-tuned parameters-wo autolog")
+        mlflow.sklearn.log_model(model, "RF-tuned parameters-wo autolog")
         
         
 
+            
+ 
         
