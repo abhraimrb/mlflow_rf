@@ -1,7 +1,7 @@
-name: mlflow_clf
+name: mlflow_rf
 
 conda_env: conda.yaml
 
 entry_points:
   main:
-    command: "python train_clf.py"
+    command: "python train_clf.py "
