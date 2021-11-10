@@ -4,6 +4,4 @@ conda_env: conda.yaml
 
 entry_points:
   main:
-    parameters:
-      C: {type: float, default: 0.5}
-    command: "python train_clf.py {C}"
+    command: "python train_clf.py "
