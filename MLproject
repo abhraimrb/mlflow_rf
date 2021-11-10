@@ -4,4 +4,10 @@ conda_env: conda.yaml
 
 entry_points:
   main:
-    command: "python train_clf.py "
+    parameters:     
+       n_estimators: {type: int, default: 100}
+       criterion: {type: str, default: 'gini'}
+       min_samples_split: {type: int, default: 2}
+       min_samples_leaf: {type: int, default: 2}
+    command: "python train_clf.py {n_estimators} {criterion} {min_samples_split} {min_samples_leaf}"  
+  
