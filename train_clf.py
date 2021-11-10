@@ -40,8 +40,7 @@ if __name__ == "__main__":
         #n_estimators =  100
         #min_samples_split = 2
         #min_samples_leaf  =  2          
-        model = RandomForestClassifier(n_estimators=n_estimators,min_samples_split=min_samples_split, 
-                                       min_samples_leaf=min_samples_leaf)
+        model = RandomForestClassifier()
         model.fit(X_train, y_train)
         predictions =  model.predict(X_test)
         predictions_proba = model.predict_proba(X_test)
