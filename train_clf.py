@@ -37,9 +37,9 @@ if __name__ == "__main__":
     #min_samples_split = int(sys.argv[2]) if len(sys.argv) > 2 else 2
     #min_samples_leaf  = int(sys.argv[3]) if len(sys.argv) > 3 else 2
     with mlflow.start_run():  
-        n_estimators =  100
-        min_samples_split = 2
-        min_samples_leaf  =  2          
+        #n_estimators =  100
+        #min_samples_split = 2
+        #min_samples_leaf  =  2          
         model = RandomForestClassifier(n_estimators=n_estimators,min_samples_split=min_samples_split, 
                                        min_samples_leaf=min_samples_leaf)
         model.fit(X_train, y_train)
