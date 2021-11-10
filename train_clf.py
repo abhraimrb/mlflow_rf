@@ -36,7 +36,12 @@ if __name__ == "__main__":
     
 
     with mlflow.start_run():
-        model = RandomForestClassifier()
+        n_estimators = 200
+        criterion = 'gini'
+        min_samples_split = 5
+        min_samples_leaf = 2           
+        model = RandomForestClassifier(n_estimators=n_estimators,criterion=criterion,
+                                       min_samples_split=min_samples_split, min_samples_leaf=min_samples_leaf
         model.fit(X_train, y_train)
         predictions =  model.predict(X_test)
         predictions_proba = model.predict_proba(X_test)
