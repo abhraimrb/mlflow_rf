@@ -32,16 +32,12 @@ if __name__ == "__main__":
     X_test = test.drop(["loan_approval_status"], axis=1)
     y_train = train[["loan_approval_status"]]
     y_test = test[["loan_approval_status"]]
-
-    
-
-    with mlflow.start_run():
-        n_estimators = 200
-        criterion = 'gini'
-        min_samples_split = 5
-        min_samples_leaf = 2           
-        model = RandomForestClassifier(n_estimators=n_estimators,criterion=criterion,
-                                       min_samples_split=min_samples_split, min_samples_leaf=min_samples_leaf
+    n_estimators = int(sys.argv[1]) if len(sys.argv) > 1 else 100
+    min_samples_split = int(sys.argv[2]) if len(sys.argv) > 2 else 2
+    min_samples_leaf  = int(sys.argv[3]) if len(sys.argv) > 3 else 2
+    with mlflow.start_run():         
+        model = RandomForestClassifier(n_estimators=n_estimators,min_samples_split=min_samples_split, 
+                                       min_samples_leaf=min_samples_leaf)
         model.fit(X_train, y_train)
         predictions =  model.predict(X_test)
         predictions_proba = model.predict_proba(X_test)
