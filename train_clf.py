@@ -45,7 +45,7 @@ if __name__ == "__main__":
         test_precision_score = precision_score(y_test, predictions)
         test_recall_score = recall_score(y_test, predictions)
         test_f1_score = f1_score(y_test, predictions)
-        auc_score = roc_auc_score(y_test, predictions_proba)
+        auc_score = roc_auc_score(y_test, predictions_proba[:,1])
         metrics = {"Test_accuracy": test_accuracy, "Test_precision_score": test_precision_score,
                    "Test_recall_score":test_recall_score,"Test_f1_score":test_f1_score, "auc score":auc_score}
     
