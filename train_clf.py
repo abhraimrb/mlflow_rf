@@ -39,7 +39,7 @@ if __name__ == "__main__":
         model = RandomForestClassifier()
         model.fit(X_train, y_train)
         predictions =  model.predict(X_test)
-        predictions_proba=model.predict_proba(X_test)
+        predictions_proba = model.predict_proba(X_test)
         
         test_accuracy = accuracy_score(y_test, predictions)
         test_precision_score = precision_score(y_test, predictions)
@@ -55,9 +55,9 @@ if __name__ == "__main__":
     
     #mlflow.set_tag("Classifier", "Random Forest")
     
-        mlflow.set_tag("Classifier", "LR-tuned parameters-wo autolog")
+        mlflow.set_tag("Classifier", "RF-tuned parameters-wo autolog")
        
-        mlflow.sklearn.log_model(model, "LR-tuned parameters-wo autolog")
+        mlflow.sklearn.log_model(model, "RF-tuned parameters-wo autolog")
         
         
 
