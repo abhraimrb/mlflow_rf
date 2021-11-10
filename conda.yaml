@@ -1,4 +1,4 @@
-name: tutorial
+name: mlflow_rf
 channels:
   - defaults
 dependencies:
