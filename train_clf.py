@@ -20,14 +20,14 @@ if __name__ == "__main__":
     warnings.filterwarnings("ignore")
     np.random.seed(40)
 
-    # Read the wine-quality csv file (make sure you're running this from the root of MLflow!)
+    
     loan_approval_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cust_data_processed.csv")
     data = pd.read_csv( loan_approval_path )
 
     # Split the data into training and test sets. (0.75, 0.25) split.
     train, test = train_test_split(data)
 
-    # The predicted column is "quality" which is a scalar from [3, 9]
+    
     X_train = train.drop(["loan_approval_status"], axis=1)
     X_test = test.drop(["loan_approval_status"], axis=1)
     y_train = train[["loan_approval_status"]]
@@ -52,16 +52,16 @@ if __name__ == "__main__":
         metrics = {"Test_accuracy": test_accuracy, "Test_precision_score": test_precision_score,
                    "Test_recall_score":test_recall_score,"Test_f1_score":test_f1_score, "auc score":auc_score}
     
-  # Log the value of the metric from this run.
+  
         mlflow.log_param("n_trees",n_estimators)        
         mlflow.log_metrics(metrics )
    
     
-    #mlflow.set_tag("Classifier", "Random Forest")
+   
     
-        mlflow.set_tag("Classifier", "RF-tuned parameters-wo autolog")
+        mlflow.set_tag("Classifier", "RF-tuned parameters")
        
-        mlflow.sklearn.log_model(model, "RF-tuned parameters-wo autolog")
+        mlflow.sklearn.log_model(model, "RF-tuned parameters")
         
         
 
